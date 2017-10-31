@@ -4,9 +4,9 @@ Struktury danych:
         LinkedList (jednokierunkowa i dwukierunkowa) - done
     Stos - done
     Kolejka - done
+    Drzewo - done
+        Binary Search Tree - done
     Set
-    Drzewo
-        Binary Search Tree
     Mapy
 
 Złożoność obliczeniowa
