@@ -1,11 +1,11 @@
 Struktury danych:
-    Lista - done
-        ArrayList - done
-        LinkedList (jednokierunkowa i dwukierunkowa) - done
-    Stos - done
-    Kolejka - done
-    Drzewo - done
-        Binary Search Tree - done
+    Lista
+        ArrayList
+        LinkedList (jednokierunkowa i dwukierunkowa)
+    Stos
+    Kolejka
+    Drzewo
+        Binary Search Tree
     Set
     Mapy
 

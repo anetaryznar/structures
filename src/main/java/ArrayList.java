@@ -1,53 +1,45 @@
-import java.util.function.Function;
+import java.util.Arrays;
 
-public class ArrayList<Type> implements List<Type> {
-    private Function<Integer, Type[]> supplier;
-    private Type[] array;
+public class ArrayList implements List {
+    private double[] elements;
     private int length;
-    private int sizeToAdd;
 
-    public ArrayList(int size, int sizeToAdd, Function<Integer, Type[]> supplier) {
-        this.supplier = supplier;
-        array = supplier.apply(size);
+    public ArrayList() {
+        elements = new double[10];
         length = 0;
-        this.sizeToAdd = sizeToAdd;
     }
 
     @Override
-    public void add(Type a) {
-        if(length == array.length) {
-            addSize(sizeToAdd);
+    public void add(double a) {
+        if(elements.length == length) {
+            double[] temp = new double[length + 10];
+            System.arraycopy(elements, 0, temp, 0, length);
+
+            elements = temp;
         }
-        array[length] = a;
+
+        elements[length] = a;
         ++length;
     }
 
-    public void addSize(int add) {
-        Type[] temp = supplier.apply(length + add);
-
-        System.arraycopy(array, 0, temp, 0, array.length);
-
-        array = temp;
+    @Override
+    public double get(int i) {
+        if(i >= length || i < 0) {
+            throw new IndexOutOfBoundsException("can't find index " + i + ", length = " + length);
+        }
+        return elements[i];
     }
 
     @Override
-    public void remove(int index) {
-        if(index >= length) {
-            throw new IndexOutOfBoundsException(index + " >= " + length);
+    public void remove(int pos) {
+        if(pos >= length || pos < 0) {
+            throw new IndexOutOfBoundsException("can't find index " + pos + ", length = " + length);
         }
 
-        for(int i = index; i < length - 1; ++i) {
-            array[i] = array[i + 1];
+        for(int i = pos; i < length - 1;++i) {
+            elements[i] = elements[i + 1];
         }
         --length;
-    }
-
-    @Override
-    public Type get(int i) {
-        if(i >= length) {
-            throw new IndexOutOfBoundsException(i + " >= " + length);
-        }
-        return array[i];
     }
 
     @Override
@@ -57,17 +49,6 @@ public class ArrayList<Type> implements List<Type> {
 
     @Override
     public String toString() {
-        if(length == 0) {
-            return "[]";
-        }
-
-        StringBuilder textBuilder = new StringBuilder("[");
-        for(int i = 0; i < length - 1; ++i) {
-            textBuilder.append(array[i]).append(", ");
-        }
-
-        textBuilder.append(array[length - 1]).append("]");
-
-        return textBuilder.toString();
+        return Arrays.toString(elements);
     }
 }

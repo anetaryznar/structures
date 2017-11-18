@@ -1,100 +1,67 @@
-import java.util.PriorityQueue;
 import java.util.Random;
-import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        //Random random = new Random();
+        /*String[] tab = new String[]{"Ala"};
 
-        /*List<Integer> arrayList = new ArrayList<Integer>(10, 5, (Integer size) -> {
-            return new Integer[size];
-        });*/
+        String result = concat(tab, " ");
 
-        /*System.out.println("ArrayList:");
+        if("Ala".equals(result)) {
+            System.out.println("OK");
+        } else {
+            System.out.println("Error");
+            System.out.println("Ala ma kota");
+            System.out.println(result);
+        }*/
 
-        List<Integer> arrayList = new ArrayList<Integer>(10, 5, size -> new Integer[size]);
+        /*Random random = new Random();
+
+        int size = 10000;
+
+        int[] tab0 = new int[size];
+        int[] tab1 = new int[size];
+
+        for(int i = 0;i < tab0.length;++i) {
+            tab0[i] = random.nextInt(100);
+        }
+
+        long now = System.nanoTime();
+        for(int i = 0;i < tab0.length;++i) {
+            tab1[i] = tab0[i];
+        }
+        System.out.println(System.nanoTime() - now);
+
+        for(int i = 0;i < tab0.length;++i) {
+            tab0[i] = random.nextInt(100);
+        }
+
+        now = System.nanoTime();
+        System.arraycopy(tab0, 0, tab1, 0, tab0.length);
+        System.out.println(System.nanoTime() - now);
+        */
+
+        Random random = new Random();
+
+        List numbers = new ArrayList();
 
         for(int i = 0;i < 10;++i) {
-            arrayList.add(random.nextInt(100));
-        }*/
-
-        /*System.out.println(arrayList);
-        arrayList.remove(9);
-        System.out.println(arrayList);
-        arrayList.remove(1);
-        System.out.println(arrayList);
-        arrayList.remove(0);
-        System.out.println(arrayList);
-
-        System.out.println("");
-        System.out.println("LinkedList:");*/
-
-        /*List<Double> linkedList = new LinkedList<>();
-        linkedList.add(random.nextInt(1000) / 10.0);
-        System.out.println(linkedList);
-        linkedList.remove(0);
-        System.out.println(linkedList);
-
-        System.out.println("");
-        System.out.println("LinkedStack:");
-
-        Stack<Double> linkedStack = new LinkedStack<>();
-        linkedStack.push(random.nextInt(1000) / 10.0);
-        System.out.println(linkedStack);
-        linkedStack.push(random.nextInt(1000) / 10.0);
-        linkedStack.push(random.nextInt(1000) / 10.0);
-        System.out.println(linkedStack);
-        System.out.println(linkedStack.pop());
-        System.out.println(linkedStack);
-        linkedStack.pop();
-        linkedStack.pop();
-        //linkedStack.pop();
-        System.out.println(linkedStack);
-
-        System.out.println("");
-        System.out.println("LinkedStack:");
-
-        /*Stack<Integer> arrayStack = new ArrayStack<>(10, 5, size -> new Integer[size]);
-        arrayStack.push(random.nextInt(100));
-        System.out.println(arrayStack);
-        arrayStack.push(random.nextInt(100));
-        arrayStack.push(random.nextInt(100));
-        System.out.println(arrayStack);
-        System.out.println(arrayStack.pop());
-        System.out.println(arrayStack);
-        arrayStack.pop();
-        arrayStack.pop();
-        //arrayStack.pop();
-        System.out.println(arrayStack);*/
-
-        /*Scanner scanner = new Scanner(System.in);
-
-        Stack<Integer> linkedStack = new LinkedStack<>();
-
-        int a;
-        do {
-            a = scanner.nextInt();
-            linkedStack.push(a);
-        } while(a != 0);
-
-        while(!linkedStack.isEmpty()) {
-            System.out.println(linkedStack.pop());
-        }*/
-
-        Scanner scanner = new Scanner(System.in);
-
-        Queue<Integer> linkedStack = new LinkedQueue<>();
-
-        int a;
-        do {
-            a = scanner.nextInt();
-            linkedStack.add(a);
-            System.out.println(linkedStack);
-        } while(a != 0);
-
-        while(!linkedStack.isEmpty()) {
-            System.out.println(linkedStack.poll());
-            System.out.println(linkedStack);
+            numbers.add(random.nextInt(100) / 10.0);
         }
+
+        numbers.remove(9);
+        System.out.println(numbers);
+    }
+
+    public static String concat(String[] tab, String delimiter) {
+        if(tab == null || tab.length == 0) {
+            return "";
+        }
+
+        StringBuilder result = new StringBuilder(tab[0]);
+        for(int i = 1;i < tab.length;++i) {
+            result.append(delimiter).append(tab[i]);
+        }
+
+        return result.toString();
     }
 }
