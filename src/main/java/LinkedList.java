@@ -46,6 +46,7 @@ public class LinkedList implements List {
 
         if(pos == 0) {
             first = first.next;
+            return;
         }
 
         Node beforeRemoved;
