@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
@@ -61,7 +62,7 @@ public class Main {
         System.out.println(encoded);
         System.out.println(decoded);*/
 
-        Random random = new Random();
+        /*Random random = new Random();
 
         Stack stack = new LinkedStack();
         stack.push(random.nextInt(100) / 10.0);
@@ -80,7 +81,27 @@ public class Main {
         System.out.println('\n' + stack.toString() + '\n');
         System.out.println('\n' + stack.pop() + '\n');
         System.out.println('\n' + stack.toString() + '\n');
-        //System.out.println('\n' + stack.pop() + '\n');
+        //System.out.println('\n' + stack.pop() + '\n');*/
+
+
+        Scanner scanner = new Scanner(System.in);
+        Stack<Integer> stack = new LinkedStack<>();
+
+        int a = scanner.nextInt();
+        int count = 0;
+        while(a != 0) {
+            stack.push(a);
+            ++count;
+            a = scanner.nextInt();
+        }
+
+        /*for(int i = 0;i < count;++i) {
+            System.out.println(stack.pop());
+        }*/
+
+        while(!stack.isEmpty()) {
+            System.out.println(stack.pop());
+        }
     }
 
     public static String concat(String[] tab, String delimiter) {
