@@ -40,7 +40,7 @@ public class Main {
         System.out.println(System.nanoTime() - now);
         */
 
-        Random random = new Random();
+        /*Random random = new Random();
 
         List numbers = new ArrayList();
 
@@ -49,7 +49,38 @@ public class Main {
         }
 
         numbers.remove(9);
-        System.out.println(numbers);
+        System.out.println(numbers);*/
+
+        /*String text = "abcABCxyzXYZ!";
+        int number = 100;
+
+        String encoded = encode(text, number);
+        String decoded = decode(encoded, number);
+
+        System.out.println(text);
+        System.out.println(encoded);
+        System.out.println(decoded);*/
+
+        Random random = new Random();
+
+        Stack stack = new LinkedStack();
+        stack.push(random.nextInt(100) / 10.0);
+        stack.push(random.nextInt(100) / 10.0);
+        stack.push(random.nextInt(100) / 10.0);
+        stack.push(random.nextInt(100) / 10.0);
+        stack.push(random.nextInt(100) / 10.0);
+        System.out.print("\n" + stack.toString() + "\n");
+        System.out.println('\n' + stack.pop() + '\n');
+        System.out.println('\n' + stack.toString() + '\n');
+        System.out.println('\n' + stack.pop() + '\n');
+        System.out.println('\n' + stack.toString() + '\n');
+        System.out.println('\n' + stack.pop() + '\n');
+        System.out.println('\n' + stack.toString() + '\n');
+        System.out.println('\n' + stack.pop() + '\n');
+        System.out.println('\n' + stack.toString() + '\n');
+        System.out.println('\n' + stack.pop() + '\n');
+        System.out.println('\n' + stack.toString() + '\n');
+        //System.out.println('\n' + stack.pop() + '\n');
     }
 
     public static String concat(String[] tab, String delimiter) {
@@ -63,5 +94,88 @@ public class Main {
         }
 
         return result.toString();
+    }
+
+    public static int countSmallA(String line) {
+        return 0;
+    }
+
+    private static int ALPHABET_SIZE = 'z' - 'a' + 1;
+    public  static String encode(String text, int number) {
+        if(number < 0) {
+            throw new IllegalArgumentException("number < 0");
+        }
+
+        char[] chars = text.toCharArray();
+
+        for(int i = 0;i < chars.length;++i) {
+            char c = chars[i];
+
+            char a;
+            if(Character.isLowerCase(c)) {
+                a = 'a';
+            } else if(Character.isUpperCase(c)) {
+                a = 'A';
+            } else {
+                continue;
+            }
+
+            c -= a;
+
+            //encode start
+
+            c += number;
+
+            c %= ALPHABET_SIZE;
+
+            //encode end
+
+            c += a;
+
+            chars[i] = c;
+        }
+
+        return String.valueOf(chars);
+    }
+
+    public  static String decode(String text, int number) {
+        if(number < 0) {
+            throw new IllegalArgumentException("number < 0");
+        }
+
+        char[] chars = text.toCharArray();
+
+        for(int i = 0;i < chars.length;++i) {
+            char c = chars[i];
+
+            char a;
+            if(Character.isLowerCase(c)) {
+                a = 'a';
+            } else if(Character.isUpperCase(c)) {
+                a = 'A';
+            } else {
+                continue;
+            }
+
+            c -= a;
+
+            //decode start
+
+            /*c += ALPHABET_SIZE;
+            c -= number % ALPHABET_SIZE;*/
+
+            c += ALPHABET_SIZE * (number / ALPHABET_SIZE + 1);
+            c -= number;
+
+            c %= ALPHABET_SIZE;
+
+            //decode end
+
+            c += a;
+
+            chars[i] = c;
+        }
+
+        return String.valueOf(chars);
     }
 }
