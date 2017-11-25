@@ -2,7 +2,7 @@ Struktury danych:
     Lista - done
         ArrayList - done
         LinkedList (jednokierunkowa i dwukierunkowa) - done
-    Stos
+    Stos - done
     Kolejka
     Drzewo
         Binary Search Tree
