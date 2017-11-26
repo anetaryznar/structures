@@ -1,5 +1,7 @@
+import java.util.LinkedList;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -84,7 +86,7 @@ public class Main {
         //System.out.println('\n' + stack.pop() + '\n');*/
 
 
-        Scanner scanner = new Scanner(System.in);
+        /*Scanner scanner = new Scanner(System.in);
         Stack<Integer> stack = new LinkedStack<>();
 
         int a = scanner.nextInt();
@@ -99,9 +101,78 @@ public class Main {
             System.out.println(stack.pop());
         }*/
 
-        while(!stack.isEmpty()) {
+        /*while(!stack.isEmpty()) {
             System.out.println(stack.pop());
+        }*/
+
+        /*String text = "A│la\nmiała ko│t|a.!";
+
+        //Java 7
+        char[] chars = text.toCharArray();
+
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for(char c : chars) {
+            c = Character.toLowerCase(c);
+            c = Character.isWhitespace(c) ? '_' : c;
+
+            if(Character.isLetter(c) || c == '_') {
+                stringBuilder.append(c);
+            }
         }
+
+        System.out.println(stringBuilder.toString());
+
+        //Java 8
+        System.out.println(text.toLowerCase()
+                .replaceAll("\\s", "_")
+                .codePoints()
+                .filter(c -> Character.isLetter(c) || c == '_')
+                .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                .toString());*/
+        Random random = new Random();
+
+        LinkedList<Integer> numbers = new LinkedList<>();
+
+        for(int i = 0;i < 1500;++i) {
+            numbers.add(i);
+        }
+
+        int[] array = new int[1000];
+        BinarySearchTree bst = new BinarySearchTree();
+
+        for(int i = 0;i < array.length - 1;++i) {
+            int a = numbers.remove(random.nextInt(numbers.size()));
+
+            array[i] = a;
+            bst.add(a);
+        }
+
+        array[array.length -1] = 10001;
+        bst.add(10001);
+
+        int a = 857;
+
+        long now = System.nanoTime();
+        System.out.println(contain(array, 10001));
+        System.out.println(System.nanoTime() - now);
+
+        now = System.nanoTime();
+        System.out.println(bst.contain(10001));
+        System.out.println(System.nanoTime() - now);
+
+        System.out.println();
+        System.out.println(bst.depth());
+    }
+
+    public static boolean contain(int[] array, int a) {
+        for(int e : array) {
+            if(e == a) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public static String concat(String[] tab, String delimiter) {
