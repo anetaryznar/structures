@@ -162,7 +162,18 @@ public class Main {
         System.out.println(System.nanoTime() - now);
 
         System.out.println();
+        System.out.println(bst.minDepth());
         System.out.println(bst.depth());
+
+
+        bst.normalise();
+        System.out.println();
+        System.out.println(bst.minDepth());
+        System.out.println(bst.depth());
+
+        now = System.nanoTime();
+        System.out.println(bst.contain(10001));
+        System.out.println(System.nanoTime() - now);
     }
 
     public static boolean contain(int[] array, int a) {
