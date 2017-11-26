@@ -1,90 +1,85 @@
-public class LinkedList implements List {
-    private Node first;
+public class LinkedList<Type> implements List<Type> {
+    private Node<Type> first = null;
+    private int length = 0;
 
     @Override
-    public void add(double a) {
-        Node newNode = new Node(a);
+    public void add(Type a) {
+        Node<Type> next = new Node<>(a);
 
         if(first == null) {
-            first = newNode;
+            first = next;
         } else {
-            Node current = first;
+            Node<Type> actual = first;
 
-            while(current.next != null) {
-                current = current.next;
+            while (actual.next != null) {
+                actual = actual.next;
             }
 
-            current.next = newNode;
+            actual.next = next;
         }
-    }
 
-    private Node getNode(int pos) {
-        if(pos < 0 || first == null) {
-            throw new IndexOutOfBoundsException("can't find index " + pos);
-        }
-        Node current = first;
-
-        for(int i = 0;i < pos;++i) {
-            if(current == null) {
-                throw new IndexOutOfBoundsException("can't find index " + pos);
-            }
-            current = current.next;
-        }
-        return current;
+        ++length;
     }
 
     @Override
-    public double get(int pos) {
-        return getNode(pos).value;
-    }
-
-    @Override
-    public void remove(int pos) {
-        if(first == null) {
-            throw new IndexOutOfBoundsException("can't find index " + pos);
+    public void remove(int index) {
+        if(index >= length || index < 0) {
+            throw new IndexOutOfBoundsException(index + " >= " + length);
         }
 
-        if(pos == 0) {
+        if(index == 0) {
             first = first.next;
+            --length;
+            return;
         }
 
-        Node beforeRemoved;
-        try {
-            beforeRemoved = getNode(pos - 1);
-        } catch(IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("can't find index " + pos);
+        Node<Type> actual = first;
+
+        for(int i = 0;i < index - 1;++i) {
+            actual = actual.next;
         }
 
-        if(beforeRemoved.next == null) {
-            throw new IndexOutOfBoundsException("can't find index " + pos);
+        actual.next = actual.next.next;
+        --length;
+    }
+
+    @Override
+    public Type get(int index) {
+        if(index >= length) {
+            throw new IndexOutOfBoundsException(index + " >= " + length);
         }
 
-        beforeRemoved.next = beforeRemoved.next.next;
+        Node<Type> actual = first;
+
+        for(int i = 0;i < index;++i) {
+            actual = actual.next;
+        }
+
+        return actual.value;
     }
 
     @Override
     public int size() {
-        if(first == null) {
-            return 0;
-        } else {
-            Node current = first;
-
-            int size = 0;
-            while(current.next != null) {
-                current = current.next;
-                ++size;
-            }
-
-            return size;
-        }
+        return length;
     }
 
-    private static class Node {
-        private double value;
-        private Node next;
-
-        private Node(double value) {
-            this.value = value;
+    @Override
+    public String toString() {
+        if(length == 0) {
+            return "[]";
         }
+
+        StringBuilder textBuilder = new StringBuilder("[");
+
+        Node<Type> actual = first;
+
+        for(int i = 0; i < length - 1; ++i) {
+            textBuilder.append(actual.value).append(", ");
+            actual = actual.next;
+        }
+
+        textBuilder.append(actual.value).append("]");
+
+        return textBuilder.toString();
     }
 }
