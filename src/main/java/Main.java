@@ -1,6 +1,6 @@
+import java.util.*;
 import java.util.LinkedList;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 public class Main {
@@ -130,7 +130,7 @@ public class Main {
                 .filter(c -> Character.isLetter(c) || c == '_')
                 .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
                 .toString());*/
-        Random random = new Random();
+        /*Random random = new Random();
 
         LinkedList<Integer> numbers = new LinkedList<>();
 
@@ -173,7 +173,44 @@ public class Main {
 
         now = System.nanoTime();
         System.out.println(bst.contain(10001));
-        System.out.println(System.nanoTime() - now);
+        System.out.println(System.nanoTime() - now);*/
+
+        Set<Double> set = new HashSet<>();
+
+        Random random = new Random();
+
+        int size = random.nextInt(11) + 10;
+
+        for(int i = 0;i < size;++i) {
+            set.add(i * i / 5.0);
+        }
+
+        //Java 7
+        set.foreach(new Consumer<Double>() {
+            @Override
+            public void accept(Double number) {
+                System.out.println(number);
+            }
+        });
+
+        //Java 8
+        set.foreach((Double number) -> {
+            System.out.println(number);
+        });
+
+        set.foreach(number -> {
+            System.out.println(number);
+        });
+
+        set.foreach(number -> System.out.println(number));
+
+        Consumer<Double> println = System.out::println;
+
+        set.foreach(println);
+
+        Set<String> stringSet = set.map(number -> "_" + number);
+
+        stringSet.foreach(System.out::println);
     }
 
     public static boolean contain(int[] array, int a) {

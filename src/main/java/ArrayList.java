@@ -1,6 +1,6 @@
 import java.util.Arrays;
 
-public class ArrayList implements List {
+public class ArrayList implements List<Double> {
     private double[] elements;
     private int length;
 
@@ -10,7 +10,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public void add(double a) {
+    public void add(Double a) {
         if(elements.length == length) {
             double[] temp = new double[length + 10];
             System.arraycopy(elements, 0, temp, 0, length);
@@ -23,7 +23,7 @@ public class ArrayList implements List {
     }
 
     @Override
-    public double get(int i) {
+    public Double get(int i) {
         if(i >= length || i < 0) {
             throw new IndexOutOfBoundsException("can't find index " + i + ", length = " + length);
         }

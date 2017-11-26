@@ -1,11 +1,11 @@
-public class OptimizedLinkedList implements List {
-    private Node first;
-    private Node last;
+public class OptimizedLinkedList<Type> implements List<Type> {
+    private Node<Type> first;
+    private Node<Type> last;
     private int length = 0;
 
     @Override
-    public void add(double a) {
-        Node newNode = new Node(a);
+    public void add(Type a) {
+        Node<Type> newNode = new Node(a);
 
         if(first == null) {
             first = newNode;
@@ -19,19 +19,19 @@ public class OptimizedLinkedList implements List {
         ++length;
     }
 
-    private Node getNode(int pos) {
+    private Node<Type> getNode(int pos) {
         if(pos < 0 || pos >= length) {
             throw new IndexOutOfBoundsException("can't find index " + pos);
         }
         if(pos <= length / 2) {
-            Node current = first;
+            Node<Type> current = first;
 
             for (int i = 0; i < pos; ++i) {
                 current = current.next;
             }
             return current;
         } else {
-            Node current = last;
+            Node<Type> current = last;
 
             for (int i = length; i >= pos; --i) {
                 current = current.previous;
@@ -41,7 +41,7 @@ public class OptimizedLinkedList implements List {
     }
 
     @Override
-    public double get(int pos) {
+    public Type get(int pos) {
         return getNode(pos).value;
     }
 
@@ -54,10 +54,10 @@ public class OptimizedLinkedList implements List {
         if(pos == 0) {
             first = first.next;
         } else {
-            Node toRemove = getNode(pos);
+            Node<Type> toRemove = getNode(pos);
 
-            Node beforeRemoved = toRemove.previous;
-            Node afterRemoved = toRemove.next;
+            Node<Type> beforeRemoved = toRemove.previous;
+            Node<Type> afterRemoved = toRemove.next;
 
             beforeRemoved.next = afterRemoved;
             if(afterRemoved != null) {
@@ -72,12 +72,12 @@ public class OptimizedLinkedList implements List {
         return length;
     }
 
-    private static class Node {
-        private double value;
-        private Node next;
-        private Node previous;
+    private static class Node<Type> {
+        private Type value;
+        private Node<Type> next;
+        private Node<Type> previous;
 
-        private Node(double value) {
+        private Node(Type value) {
             this.value = value;
         }
     }

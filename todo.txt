@@ -5,9 +5,9 @@ Struktury danych:
     Stos - done
     Kolejka - done
     Drzewo
-        Binary Search Tree
-    Set
-    Mapy
+        Binary Search Tree - done
+    Set - done
+    Mapy - done
     Cache
 
 Złożoność obliczeniowa
