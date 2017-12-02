@@ -1,6 +1,6 @@
-public interface List {
-    void add(double a);
-    double get(int i);
+public interface List<Type> {
+    void add(Type a);
+    Type get(int i);
     void remove(int i);
     int size();
 }

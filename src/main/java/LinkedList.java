@@ -1,14 +1,14 @@
-public class LinkedList implements List {
-    private Node first;
+public class LinkedList<Type> implements List<Type> {
+    private Node<Type> first;
 
     @Override
-    public void add(double a) {
-        Node newNode = new Node(a);
+    public void add(Type a) {
+        Node<Type> newNode = new Node<>(a);
 
         if(first == null) {
             first = newNode;
         } else {
-            Node current = first;
+            Node<Type> current = first;
 
             while(current.next != null) {
                 current = current.next;
@@ -18,11 +18,11 @@ public class LinkedList implements List {
         }
     }
 
-    private Node getNode(int pos) {
+    private Node<Type> getNode(int pos) {
         if(pos < 0 || first == null) {
             throw new IndexOutOfBoundsException("can't find index " + pos);
         }
-        Node current = first;
+        Node<Type> current = first;
 
         for(int i = 0;i < pos;++i) {
             if(current == null) {
@@ -34,7 +34,7 @@ public class LinkedList implements List {
     }
 
     @Override
-    public double get(int pos) {
+    public Type get(int pos) {
         return getNode(pos).value;
     }
 
@@ -49,7 +49,7 @@ public class LinkedList implements List {
             return;
         }
 
-        Node beforeRemoved;
+        Node<Type> beforeRemoved;
         try {
             beforeRemoved = getNode(pos - 1);
         } catch(IndexOutOfBoundsException e) {
@@ -68,7 +68,7 @@ public class LinkedList implements List {
         if(first == null) {
             return 0;
         } else {
-            Node current = first;
+            Node<Type> current = first;
 
             int size = 0;
             while(current.next != null) {
@@ -80,11 +80,11 @@ public class LinkedList implements List {
         }
     }
 
-    private static class Node {
-        private double value;
-        private Node next;
+    private static class Node<Type> {
+        private Type value;
+        private Node<Type> next;
 
-        private Node(double value) {
+        private Node(Type value) {
             this.value = value;
         }
     }
